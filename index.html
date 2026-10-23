@@ -1,0 +1,309 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Marquette Services | Neighborhood Tasks & Assistance</title>
+    <style>
+        /* Modern Reset & Typography */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background-color: #f4f7f6;
+            color: #333;
+            line-height: 1.6;
+        }
+
+        /* Navigation Header */
+        header {
+            background-color: #1a365d; /* Professional Deep Navy */
+            color: white;
+            padding: 1rem 5%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        }
+
+        .logo h1 {
+            font-size: 1.5rem;
+            font-weight: 700;
+            letter-spacing: 1px;
+        }
+
+        .logo span {
+            color: #4fd1c5; /* Energetic Teal for the student vibe */
+            font-size: 0.9rem;
+            display: block;
+            font-weight: 400;
+        }
+
+        nav ul {
+            display: flex;
+            list-style: none;
+        }
+
+        nav ul li {
+            margin-left: 20px;
+        }
+
+        nav ul li a {
+            color: white;
+            text-decoration: none;
+            font-size: 1rem;
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+
+        nav ul li a:hover, nav ul li a.active {
+            color: #4fd1c5;
+        }
+
+        /* Hero Section */
+        .hero {
+            background: linear-gradient(135deg, #1a365d 0%, #2a4365 100%);
+            color: white;
+            padding: 4rem 5%;
+            text-align: center;
+        }
+
+        .hero h2 {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .hero p {
+            font-size: 1.2rem;
+            max-width: 600px;
+            margin: 0 auto 2rem;
+            color: #e2e8f0;
+        }
+
+        /* Services & Booking Section */
+        .services-container {
+            padding: 4rem 5%;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: 2rem;
+            color: #1a365d;
+            margin-bottom: 3rem;
+        }
+
+        .grid {
+            display: flex;
+            gap: 30px;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .card {
+            background: white;
+            padding: 2.5rem 2rem;
+            border-radius: 12px;
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.05);
+            text-align: center;
+            flex: 1;
+            min-width: 280px;
+            max-width: 350px;
+            border-top: 5px solid #1a365d;
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1);
+        }
+
+        .card.featured {
+            border-top-color: #4fd1c5;
+        }
+
+        .card h3 {
+            font-size: 1.4rem;
+            color: #2d3748;
+            margin-bottom: 1rem;
+        }
+
+        .price {
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: #1a365d;
+            margin-bottom: 1.5rem;
+        }
+
+        .price span {
+            font-size: 1rem;
+            font-weight: 400;
+            color: #718096;
+        }
+
+        .card p {
+            color: #4a5568;
+            margin-bottom: 2rem;
+            font-size: 0.95rem;
+            min-height: 75px;
+        }
+
+        .btn {
+            background-color: #1a365d;
+            color: white;
+            padding: 0.75rem 1.5rem;
+            border: none;
+            border-radius: 6px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            width: 100%;
+            transition: background-color 0.3s;
+        }
+
+        .card.featured .btn {
+            background-color: #4fd1c5;
+            color: #1a365d;
+        }
+
+        .btn:hover {
+            background-color: #2b6cb0;
+            color: white;
+        }
+
+        /* Cancellation Section */
+        .cancellation-section {
+            background-color: #edf2f7;
+            padding: 4rem 5%;
+            text-align: center;
+        }
+
+        .cancel-box {
+            background: white;
+            max-width: 600px;
+            margin: 0 auto;
+            padding: 2.5rem;
+            border-radius: 12px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+        }
+
+        .cancel-box h3 {
+            color: #2d3748;
+            margin-bottom: 1rem;
+            font-size: 1.5rem;
+        }
+
+        .cancel-box p {
+            color: #718096;
+            margin-bottom: 1.5rem;
+        }
+
+        .cancel-form input {
+            width: 100%;
+            padding: 0.75rem;
+            margin-bottom: 1rem;
+            border: 1px solid #cbd5e0;
+            border-radius: 6px;
+            font-size: 1rem;
+        }
+
+        .btn-secondary {
+            background-color: #e53e3e; /* Clear Red for Cancellation action */
+            color: white;
+        }
+
+        .btn-secondary:hover {
+            background-color: #c53030;
+        }
+
+        /* Footer */
+        footer {
+            background-color: #1a365d;
+            color: #a0aec0;
+            text-align: center;
+            padding: 2rem 5%;
+            font-size: 0.9rem;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Header & Page Navigation -->
+    <header>
+        <div class="logo">
+            <h1>Marquette Services</h1>
+            <span>Student-Run & Community Driven</span>
+        </div>
+        <nav>
+            <ul>
+                <li><a href="#" class="active">Home</a></li>
+                <li><a href="#">About Us</a></li>
+                <li><a href="#">Contact</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <!-- Hero Introduction -->
+    <section class="hero">
+        <h2>Reliable Help for Everyday Tasks</h2>
+        <p>Affordable, efficient, and professional support managed by dedicated high school students in your community.</p>
+    </section>
+
+    <!-- Services & Booking Options -->
+    <section class="services-container">
+        <h2 class="section-title">Select Your Service Tier</h2>
+        <div class="grid">
+            
+            <!-- $25 Tier -->
+            <div class="card">
+                <h3>Essential Tasks</h3>
+                <div class="price">$25 <span>/ flat rate</span></div>
+                <p>Perfect for swift, single-focus tasks such as quick yard cleanups, basic tech assistance, or light organizing.</p>
+                <button class="btn" onclick="alert('Booking Essential Tasks...')">Book Service</button>
+            </div>
+
+            <!-- $35 Tier -->
+            <div class="card featured">
+                <h3>Standard Support</h3>
+                <div class="price">$35 <span>/ flat rate</span></div>
+                <p>Ideal for detailed assignments requiring focused attention, mid-sized organizational tasks, or routine maintenance projects.</p>
+                <button class="btn" onclick="alert('Booking Standard Support...')">Book Service</button>
+            </div>
+
+            <!-- $45 Tier -->
+            <div class="card">
+                <h3>Premium Assistance</h3>
+                <div class="price">$45 <span>/ flat rate</span></div>
+                <p>Designed for comprehensive, labor-intensive projects or multi-stage tasks requiring a complete, detailed solution.</p>
+                <button class="btn" onclick="alert('Booking Premium Assistance...')">Book Service</button>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- Cancellation Review Requests -->
+    <section class="cancellation-section">
+        <div class="cancel-box">
+            <h3>Need to Request a Cancellation?</h3>
+            <p>Enter your appointment confirmation details below. Our management team will manually review and process your request immediately.</p>
+            <form class="cancel-form" onsubmit="event.preventDefault(); alert('Your cancellation request has been submitted for administrative review.');">
+                <input type="text" placeholder="Your Name" required>
+                <input type="email" placeholder="Email Address" required>
+                <input type="text" placeholder="Booking Reference or Job Type" required>
+                <button type="submit" class="btn btn-secondary">Submit Cancellation Request</button>
+            </form>
+        </div>
+    </section>
+
+    <!-- Footer Status -->
+    <footer>
+        <p>&copy; 2026 Marquette Services. Built professionally by students.</p>
+    </footer>
+
+</body>
+</html>
