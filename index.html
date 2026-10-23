@@ -13,6 +13,10 @@
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
         }
 
+        html {
+            scroll-behavior: smooth;
+        }
+
         body {
             background-color: #f4f7f6;
             color: #333;
@@ -21,13 +25,16 @@
 
         /* Navigation Header */
         header {
-            background-color: #1a365d; /* Professional Deep Navy */
+            background-color: #1a365d;
             color: white;
             padding: 1rem 5%;
             display: flex;
             justify-content: space-between;
             align-items: center;
             box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
         }
 
         .logo h1 {
@@ -37,7 +44,7 @@
         }
 
         .logo span {
-            color: #4fd1c5; /* Energetic Teal for the student vibe */
+            color: #4fd1c5;
             font-size: 0.9rem;
             display: block;
             font-weight: 400;
@@ -46,6 +53,7 @@
         nav ul {
             display: flex;
             list-style: none;
+            flex-wrap: wrap;
         }
 
         nav ul li {
@@ -60,7 +68,8 @@
             transition: color 0.3s;
         }
 
-        nav ul li a:hover, nav ul li a.active {
+        nav ul li a:hover,
+        nav ul li a.active {
             color: #4fd1c5;
         }
 
@@ -84,8 +93,57 @@
             color: #e2e8f0;
         }
 
+        .age-switcher {
+            max-width: 760px;
+            margin: 0 auto;
+        }
+
+        .hero-label {
+            font-size: 0.9rem;
+            letter-spacing: 0.08rem;
+            text-transform: uppercase;
+            color: #cbd5e0;
+            margin-bottom: 0.8rem;
+        }
+
+        .age-toggle {
+            display: flex;
+            justify-content: center;
+            gap: 0.75rem;
+            flex-wrap: wrap;
+            margin-bottom: 1rem;
+        }
+
+        .age-btn {
+            background: rgba(255, 255, 255, 0.08);
+            color: white;
+            border: 1px solid rgba(255, 255, 255, 0.25);
+            padding: 0.7rem 1.1rem;
+            border-radius: 999px;
+            cursor: pointer;
+            font-size: 0.95rem;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+
+        .age-btn:hover,
+        .age-btn.active {
+            background: #4fd1c5;
+            color: #1a365d;
+            border-color: #4fd1c5;
+            transform: translateY(-1px);
+        }
+
+        .age-output {
+            color: #e2e8f0;
+            font-size: 1rem;
+            min-height: 1.5em;
+        }
+
         /* Services & Booking Section */
-        .services-container {
+        .services-container,
+        .about-section,
+        .contact-section {
             padding: 4rem 5%;
             max-width: 1200px;
             margin: 0 auto;
@@ -176,6 +234,35 @@
             color: white;
         }
 
+        /* About Section */
+        .about-box,
+        .contact-box {
+            background: white;
+            border-radius: 12px;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 2.5rem;
+            box-shadow: 0 10px 20px rgba(0,0,0,0.05);
+        }
+
+        .about-box p,
+        .contact-box p {
+            color: #4a5568;
+            margin-bottom: 1.2rem;
+        }
+
+        .contact-list {
+            list-style: none;
+            padding: 0;
+            margin-top: 1rem;
+        }
+
+        .contact-list li {
+            margin-bottom: 0.8rem;
+            color: #2d3748;
+            font-weight: 500;
+        }
+
         /* Cancellation Section */
         .cancellation-section {
             background-color: #edf2f7;
@@ -213,7 +300,7 @@
         }
 
         .btn-secondary {
-            background-color: #e53e3e; /* Clear Red for Cancellation action */
+            background-color: #e53e3e;
             color: white;
         }
 
@@ -233,7 +320,6 @@
 </head>
 <body>
 
-    <!-- Header & Page Navigation -->
     <header>
         <div class="logo">
             <h1>Marquette Services</h1>
@@ -241,25 +327,32 @@
         </div>
         <nav>
             <ul>
-                <li><a href="#" class="active">Home</a></li>
-                <li><a href="#">About Us</a></li>
-                <li><a href="#">Contact</a></li>
+                <li><a href="#home" class="active">Home</a></li>
+                <li><a href="#about">About Us</a></li>
+                <li><a href="#contact">Contact</a></li>
             </ul>
         </nav>
     </header>
 
-    <!-- Hero Introduction -->
-    <section class="hero">
+    <section id="home" class="hero">
         <h2>Reliable Help for Everyday Tasks</h2>
         <p>Affordable, efficient, and professional support managed by dedicated high school students in your community.</p>
+
+        <div class="age-switcher">
+            <p class="hero-label">I’m booking for:</p>
+            <div class="age-toggle">
+                <button class="age-btn active" data-age="Kids">Kids</button>
+                <button class="age-btn" data-age="Teens">Teens</button>
+                <button class="age-btn" data-age="Adults">Adults</button>
+                <button class="age-btn" data-age="Seniors">Seniors</button>
+            </div>
+            <p id="age-output" class="age-output">Showing options for kids and young learners.</p>
+        </div>
     </section>
 
-    <!-- Services & Booking Options -->
     <section class="services-container">
         <h2 class="section-title">Select Your Service Tier</h2>
         <div class="grid">
-            
-            <!-- $25 Tier -->
             <div class="card">
                 <h3>Essential Tasks</h3>
                 <div class="price">$25 <span>/ flat rate</span></div>
@@ -267,7 +360,6 @@
                 <button class="btn" onclick="alert('Booking Essential Tasks...')">Book Service</button>
             </div>
 
-            <!-- $35 Tier -->
             <div class="card featured">
                 <h3>Standard Support</h3>
                 <div class="price">$35 <span>/ flat rate</span></div>
@@ -275,18 +367,35 @@
                 <button class="btn" onclick="alert('Booking Standard Support...')">Book Service</button>
             </div>
 
-            <!-- $45 Tier -->
             <div class="card">
                 <h3>Premium Assistance</h3>
                 <div class="price">$45 <span>/ flat rate</span></div>
                 <p>Designed for comprehensive, labor-intensive projects or multi-stage tasks requiring a complete, detailed solution.</p>
                 <button class="btn" onclick="alert('Booking Premium Assistance...')">Book Service</button>
             </div>
-
         </div>
     </section>
 
-    <!-- Cancellation Review Requests -->
+    <section id="about" class="about-section">
+        <h2 class="section-title">About Us</h2>
+        <div class="about-box">
+            <p>Marquette Services is a neighborhood-based student-run service platform built to help families and community members complete everyday tasks with dependable, affordable support.</p>
+            <p>We combine friendly service, practical problem-solving, and a strong local community focus to create support that is both accessible and trustworthy.</p>
+        </div>
+    </section>
+
+    <section id="contact" class="contact-section">
+        <h2 class="section-title">Contact</h2>
+        <div class="contact-box">
+            <p>Reach out to our support team for bookings, inquiries, or cancellation requests. We’re happy to help.</p>
+            <ul class="contact-list">
+                <li>Email: hello@marquetteservices.com</li>
+                <li>Phone: (555) 123-4567</li>
+                <li>Hours: Monday-Saturday, 9:00 AM - 6:00 PM</li>
+            </ul>
+        </div>
+    </section>
+
     <section class="cancellation-section">
         <div class="cancel-box">
             <h3>Need to Request a Cancellation?</h3>
@@ -300,10 +409,37 @@
         </div>
     </section>
 
-    <!-- Footer Status -->
     <footer>
         <p>&copy; 2026 Marquette Services. Built professionally by students.</p>
     </footer>
+
+    <script>
+        const ageButtons = document.querySelectorAll('.age-btn');
+        const ageOutput = document.getElementById('age-output');
+
+        const ageMessages = {
+            Kids: 'Showing options for kids and young learners.',
+            Teens: 'Showing options for teens and student support needs.',
+            Adults: 'Showing options for adults and busy professionals.',
+            Seniors: 'Showing options for seniors and household support services.'
+        };
+
+        ageButtons.forEach(button => {
+            button.addEventListener('click', () => {
+                ageButtons.forEach(btn => btn.classList.toggle('active', btn === button));
+                const selectedAge = button.dataset.age;
+                ageOutput.textContent = ageMessages[selectedAge] || 'Showing options for all age groups.';
+            });
+        });
+
+        const navLinks = document.querySelectorAll('nav a');
+        navLinks.forEach(link => {
+            link.addEventListener('click', () => {
+                navLinks.forEach(item => item.classList.remove('active'));
+                link.classList.add('active');
+            });
+        });
+    </script>
 
 </body>
 </html>
