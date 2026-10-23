@@ -5,7 +5,23 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Administration Panel | Marquette Services</title>
     <style>
-        /* Modern Reset & Typography */
+        :root {
+            --bg: #f3f7fb;
+            --panel: #ffffff;
+            --navy: #0f172a;
+            --navy-soft: #1e3a8a;
+            --teal: #14b8a6;
+            --teal-soft: #5eead4;
+            --sky: #38bdf8;
+            --success: #16a34a;
+            --warning: #d97706;
+            --danger: #dc2626;
+            --text: #1f2937;
+            --muted: #5b6475;
+            --line: #e2e8f0;
+            --shadow: 0 12px 30px rgba(15, 23, 42, 0.08);
+        }
+
         * {
             margin: 0;
             padding: 0;
@@ -14,143 +30,116 @@
         }
 
         body {
-            background-color: #f0f4f8;
-            color: #1a202c;
+            background: var(--bg);
+            color: var(--text);
             line-height: 1.5;
         }
 
-        /* Top Admin Navbar */
         header {
-            background-color: #0f172a; /* Extra dark slate for system administration */
-            color: #fff;
+            background: linear-gradient(135deg, var(--navy) 0%, #111827 100%);
+            color: white;
             padding: 1rem 5%;
             display: flex;
             justify-content: space-between;
             align-items: center;
-            border-bottom: 3px solid #38bdf8;
+            border-bottom: 3px solid var(--sky);
         }
 
         .logo h1 {
-            font-size: 1.4rem;
-            font-weight: 700;
-            color: #fff;
+            font-size: 1.45rem;
+            font-weight: 800;
         }
 
         .logo span {
-            color: #38bdf8;
-            font-size: 0.85rem;
             display: block;
-            font-weight: 600;
+            font-size: 0.8rem;
+            color: var(--sky);
+            letter-spacing: 0.08rem;
             text-transform: uppercase;
+            font-weight: 700;
         }
 
         .badge-admin {
-            background-color: #ef4444;
-            color: white;
-            padding: 0.25rem 0.75rem;
-            border-radius: 9999px;
+            background: rgba(239, 68, 68, 0.12);
+            color: #fecaca;
+            border: 1px solid rgba(239, 68, 68, 0.5);
+            padding: 0.45rem 0.8rem;
+            border-radius: 999px;
             font-size: 0.8rem;
-            font-weight: bold;
+            font-weight: 700;
         }
 
-        /* Dashboard Main Layout grid */
-        .wrapper {
+        .dashboard {
             max-width: 1400px;
             margin: 2rem auto;
             padding: 0 2%;
             display: grid;
-            grid-template-columns: 1fr;
+            grid-template-columns: 2fr 1fr;
             gap: 2rem;
         }
 
-        @media (min-width: 1024px) {
-            .wrapper {
-                grid-template-columns: 2fr 1fr;
-            }
+        .stack {
+            display: flex;
+            flex-direction: column;
+            gap: 2rem;
         }
 
-        /* Generic Admin Section Cards */
-        .admin-card {
-            background: #ffffff;
-            border-radius: 12px;
+        .card {
+            background: var(--panel);
+            border-radius: 16px;
             padding: 1.5rem;
-            box-shadow: 0 4px 6px -1px rgba(0,0,0,0.05), 0 2px 4px -1px rgba(0,0,0,0.03);
-            border: 1px solid #e2e8f0;
+            box-shadow: var(--shadow);
+            border: 1px solid var(--line);
         }
 
         .card-title {
             font-size: 1.2rem;
-            color: #0f172a;
-            margin-bottom: 1.25rem;
-            font-weight: 700;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            border-bottom: 1px solid #edf2f7;
-            padding-bottom: 0.5rem;
+            font-weight: 800;
+            color: var(--navy);
+            margin-bottom: 1.2rem;
+            padding-bottom: 0.6rem;
+            border-bottom: 1px solid var(--line);
         }
 
-        /* Telemetry Financial Stats Grid */
         .stats-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            grid-template-columns: repeat(auto-fit, minmax(190px, 1fr));
             gap: 1rem;
-            margin-bottom: 2rem;
         }
 
         .stat-box {
-            padding: 1.25rem;
-            border-radius: 8px;
+            border-radius: 12px;
+            padding: 1.15rem 1rem;
             color: white;
         }
 
-        .stat-box.gross { background: linear-gradient(135deg, #1e3a8a 0%, #3b82f6 100%); }
-        .stat-box.crew { background: linear-gradient(135deg, #0f766e 0%, #0d9488 100%); }
-        .stat-box.net { background: linear-gradient(135deg, #15803d 0%, #16a34a 100%); }
+        .stat-box.gross {
+            background: linear-gradient(135deg, var(--navy-soft) 0%, #2563eb 100%);
+        }
+
+        .stat-box.crew {
+            background: linear-gradient(135deg, #0f766e 0%, #0d9488 100%);
+        }
+
+        .stat-box.net {
+            background: linear-gradient(135deg, #15803d 0%, #22c55e 100%);
+        }
 
         .stat-box label {
-            font-size: 0.85rem;
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
-            opacity: 0.9;
             display: block;
+            font-size: 0.75rem;
+            letter-spacing: 0.08rem;
+            text-transform: uppercase;
+            opacity: 0.9;
+            margin-bottom: 0.4rem;
         }
 
         .stat-box .value {
-            font-size: 1.8rem;
-            font-weight: 700;
-            margin-top: 0.25rem;
+            font-size: clamp(1.6rem, 2.4vw, 2.2rem);
+            font-weight: 800;
         }
 
-        /* Predictor Input Control Panel */
-        .predictor-grid {
-            display: grid;
-            grid-template-columns: 1fr;
-            gap: 1rem;
-        }
-
-        .control-group {
-            margin-bottom: 1rem;
-        }
-
-        .control-group label {
-            display: block;
-            font-size: 0.9rem;
-            font-weight: 600;
-            margin-bottom: 0.4rem;
-            color: #4a5568;
-        }
-
-        .control-group input {
-            width: 100%;
-            padding: 0.6rem;
-            border: 1px solid #cbd5e0;
-            border-radius: 6px;
-            font-size: 1rem;
-        }
-
-        /* Data Tables for Jobs & Crews */
-        .table-responsive {
+        .table-wrap {
             width: 100%;
             overflow-x: auto;
         }
@@ -158,74 +147,219 @@
         table {
             width: 100%;
             border-collapse: collapse;
-            text-align: left;
-            font-size: 0.9rem;
+            min-width: 620px;
         }
 
         th {
-            background-color: #f8fafc;
-            color: #64748b;
-            padding: 0.75rem 1rem;
-            font-weight: 600;
-            border-bottom: 2px solid #e2e8f0;
+            background: #f8fafc;
+            color: #475569;
+            font-size: 0.8rem;
+            letter-spacing: 0.04rem;
+            text-transform: uppercase;
+            padding: 0.8rem 1rem;
+            text-align: left;
+            border-bottom: 2px solid var(--line);
         }
 
         td {
-            padding: 0.85rem 1rem;
-            border-bottom: 1px solid #e2e8f0;
-            vertical-align: middle;
+            padding: 0.9rem 1rem;
+            border-bottom: 1px solid var(--line);
+            color: var(--text);
         }
 
-        /* Job Status Selector Options */
+        .service-price {
+            font-weight: 700;
+            color: var(--navy);
+        }
+
         .status-select {
-            padding: 0.35rem 0.5rem;
-            border-radius: 6px;
-            font-size: 0.85rem;
-            font-weight: 600;
-            border: 1px solid #cbd5e0;
+            width: 100%;
+            padding: 0.55rem 0.7rem;
+            border-radius: 8px;
+            border: 1px solid #cbd5e1;
+            background: #fff;
+            font-size: 0.9rem;
+            color: var(--text);
         }
 
-        /* Disciplinary Enforcement Action Buttons */
-        .btn-action {
-            padding: 0.35rem 0.75rem;
-            border: none;
-            border-radius: 4px;
-            font-size: 0.8rem;
-            font-weight: 600;
-            cursor: pointer;
-            margin-right: 0.25rem;
-            transition: opacity 0.2s;
+        .side-panel {
+            display: flex;
+            flex-direction: column;
+            gap: 2rem;
         }
 
-        .btn-action:hover { opacity: 0.85; }
-        .btn-deduct { background-color: #fef3c7; color: #d97706; border: 1px solid #fcd34d; }
-        .btn-suspend { background-color: #ffedd5; color: #ea580c; }
-        .btn-kick { background-color: #fee2e2; color: #dc2626; }
+        .predictor-grid {
+            display: grid;
+            grid-template-columns: repeat(3, minmax(0, 1fr));
+            gap: 0.75rem;
+            margin-bottom: 1rem;
+        }
 
-        /* Milestone Tracker Element */
-        .milestone-container {
+        .field {
+            display: flex;
+            flex-direction: column;
+            gap: 0.45rem;
+        }
+
+        .field label {
+            font-size: 0.78rem;
+            font-weight: 700;
+            color: var(--muted);
+            letter-spacing: 0.04rem;
+            text-transform: uppercase;
+        }
+
+        .field input {
+            width: 100%;
+            border: 1px solid #cbd5e1;
+            border-radius: 8px;
+            padding: 0.7rem 0.75rem;
+            font-size: 0.95rem;
+        }
+
+        .progress-wrap {
             margin-top: 1rem;
         }
 
-        .milestone-bar {
-            background-color: #e2e8f0;
-            border-radius: 9999px;
-            height: 12px;
+        .progress-bar {
+            width: 100%;
+            height: 14px;
+            background: #e2e8f0;
+            border-radius: 999px;
             overflow: hidden;
-            margin: 0.5rem 0;
         }
 
-        .milestone-fill {
-            background-color: #10b981;
+        .progress-fill {
+            width: 61%;
             height: 100%;
-            width: 68%; 
-            transition: width 0.4s ease;
+            background: linear-gradient(90deg, var(--teal) 0%, var(--sky) 100%);
+            border-radius: inherit;
+            transition: width 0.3s ease;
+        }
+
+        .progress-text {
+            margin-top: 0.7rem;
+            color: var(--muted);
+            font-size: 0.92rem;
+            font-weight: 600;
+        }
+
+        .crew-list {
+            display: grid;
+            gap: 0.9rem;
+        }
+
+        .crew-row {
+            background: #f8fafc;
+            border: 1px solid var(--line);
+            border-radius: 12px;
+            padding: 0.9rem 1rem;
+        }
+
+        .crew-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 0.5rem;
+            margin-bottom: 0.4rem;
+        }
+
+        .crew-name {
+            font-weight: 700;
+            color: var(--navy);
+        }
+
+        .crew-status {
+            font-size: 0.75rem;
+            font-weight: 700;
+            padding: 0.3rem 0.55rem;
+            border-radius: 999px;
+            background: rgba(34, 197, 94, 0.12);
+            color: var(--success);
+        }
+
+        .crew-meta {
+            color: var(--muted);
+            font-size: 0.88rem;
+            margin-bottom: 0.7rem;
+        }
+
+        .action-row {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+        }
+
+        .btn-action {
+            border: none;
+            border-radius: 8px;
+            padding: 0.45rem 0.7rem;
+            font-size: 0.78rem;
+            font-weight: 700;
+            cursor: pointer;
+            transition: transform 0.2s ease, opacity 0.2s ease;
+        }
+
+        .btn-action:hover {
+            opacity: 0.92;
+            transform: translateY(-1px);
+        }
+
+        .btn-deduct {
+            background: #fef3c7;
+            color: var(--warning);
+        }
+
+        .btn-suspend {
+            background: #ffedd5;
+            color: #c2410c;
+        }
+
+        .btn-kick {
+            background: #fee2e2;
+            color: var(--danger);
+        }
+
+        .milestone-box {
+            margin-top: 1rem;
+            background: #f8fafc;
+            padding: 1rem;
+            border-radius: 12px;
+            border: 1px solid var(--line);
+        }
+
+        .milestone-box h4 {
+            color: var(--navy);
+            margin-bottom: 0.35rem;
+        }
+
+        .milestone-box p {
+            color: var(--muted);
+            font-size: 0.92rem;
+            margin-bottom: 0.8rem;
+        }
+
+        @media (max-width: 980px) {
+            .dashboard {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media (max-width: 640px) {
+            header {
+                flex-direction: column;
+                gap: 0.7rem;
+                text-align: center;
+            }
+
+            .predictor-grid {
+                grid-template-columns: 1fr;
+            }
         }
     </style>
 </head>
 <body>
 
-    <!-- Admin Command Header -->
     <header>
         <div class="logo">
             <h1>Marquette Services</h1>
@@ -234,48 +368,43 @@
         <div class="badge-admin">Administrative Mode</div>
     </header>
 
-    <div class="wrapper">
-        
-        <!-- MAIN OPERATIONAL STACK -->
-        <main style="display: flex; flex-direction: column; gap: 2rem;">
-            
-            <!-- Live Financial Telemetry Breakdown -->
-            <section class="admin-card">
+    <div class="dashboard">
+        <main class="stack">
+            <section class="card">
                 <div class="card-title">Corporate Financial Accounting</div>
                 <div class="stats-grid">
                     <div class="stat-box gross">
-                        <label>Gross Revenue Accumulated</label>
-                        <div class="value" id="gross-val">$70.00</div>
+                        <label>Gross Revenue</label>
+                        <div class="value" id="gross-val">$0.00</div>
                     </div>
                     <div class="stat-box crew">
-                        <label>Crew Wages Disbursed</label>
-                        <div class="value" id="crew-val">$45.00</div>
+                        <label>Crew Wages</label>
+                        <div class="value" id="crew-val">$0.00</div>
                     </div>
                     <div class="stat-box net">
-                        <label>Net Business Income</label>
-                        <div class="value" id="net-val">$25.00</div>
+                        <label>Net Income</label>
+                        <div class="value" id="net-val">$0.00</div>
                     </div>
                 </div>
             </section>
 
-            <!-- Active Appointments Routing Engine -->
-            <section class="admin-card">
-                <div class="card-title">Job Scheduling & Lifecycle State Matrix</div>
-                <div class="table-responsive">
+            <section class="card">
+                <div class="card-title">Job Scheduling &amp; Workflow Matrix</div>
+                <div class="table-wrap">
                     <table>
                         <thead>
                             <tr>
                                 <th>Client Address</th>
                                 <th>Assigned Crew</th>
                                 <th>Service Premium</th>
-                                <th>Workflow Lifecycle State</th>
+                                <th>Workflow State</th>
                             </tr>
                         </thead>
                         <tbody>
                             <tr data-price="45">
                                 <td>104 Marquette Ave</td>
                                 <td>Alpha Crew</td>
-                                <td><strong>$45.00</strong></td>
+                                <td class="service-price">$45.00</td>
                                 <td>
                                     <select class="status-select" onchange="calculateLiveAccounting()">
                                         <option value="pending">Pending</option>
@@ -288,7 +417,7 @@
                             <tr data-price="25">
                                 <td>312 Elm Lane</td>
                                 <td>Beta Team</td>
-                                <td><strong>$25.00</strong></td>
+                                <td class="service-price">$25.00</td>
                                 <td>
                                     <select class="status-select" onchange="calculateLiveAccounting()">
                                         <option value="pending">Pending</option>
@@ -299,109 +428,184 @@
                                 </td>
                             </tr>
                             <tr data-price="35">
-                                <td>719 Oak Street</td> 
+                                <td>719 Oak Street</td>
                                 <td>Alpha Crew</td>
-                                <td><strong>$35.00</strong></td>
-                                <td> 
-Pending
-Scheduled
-Completed
-Paid
+                                <td class="service-price">$35.00</td>
+                                <td>
+                                    <select class="status-select" onchange="calculateLiveAccounting()">
+                                        <option value="pending">Pending</option>
+                                        <option value="scheduled">Scheduled</option>
+                                        <option value="completed">Completed</option>
+                                        <option value="paid" selected>Paid</option>
+                                    </select>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </section>
+        </main>
 
+        <aside class="side-panel">
+            <section class="card">
+                <div class="card-title">Predictive Growth Engine</div>
+                <div class="predictor-grid">
+                    <div class="field">
+                        <label for="pred-workers">Crews</label>
+                        <input id="pred-workers" type="number" value="3" min="0">
+                    </div>
+                    <div class="field">
+                        <label for="pred-yards">Yards / Crew</label>
+                        <input id="pred-yards" type="number" value="12" min="0">
+                    </div>
+                    <div class="field">
+                        <label for="pred-weeks">Weeks</label>
+                        <input id="pred-weeks" type="number" value="6" min="0">
+                    </div>
+                </div>
 
+                <div class="progress-wrap">
+                    <div class="progress-bar">
+                        <div id="progress-bar" class="progress-fill"></div>
+                    </div>
+                    <div id="progress-text" class="progress-text">Current Progress Level: 61% Complete (216 Yards Projected)</div>
+                </div>
+            </section>
 
+            <section class="card">
+                <div class="card-title">Crew Operations &amp; Enforcement</div>
 
+                <div class="crew-list">
+                    <div class="crew-row" id="crew-alpha">
+                        <div class="crew-header">
+                            <div class="crew-name">Alpha Crew</div>
+                            <div class="crew-status">Active Range</div>
+                        </div>
+                        <div class="crew-meta">14 Yards Managed • Weekly Output: 14</div>
+                        <div class="action-row">
+                            <button class="btn-action btn-deduct" onclick="deductCrew('Alpha Crew')">Deduct</button>
+                            <button class="btn-action btn-suspend" onclick="suspendCrew('Alpha Crew', 'crew-alpha')">Suspend</button>
+                            <button class="btn-action btn-kick" onclick="kickCrew('Alpha Crew', 'crew-alpha')">Kick</button>
+                        </div>
+                    </div>
 
+                    <div class="crew-row" id="crew-beta">
+                        <div class="crew-header">
+                            <div class="crew-name">Beta Team</div>
+                            <div class="crew-status">On Notice</div>
+                        </div>
+                        <div class="crew-meta">5 Yards Managed • Weekly Output: 5</div>
+                        <div class="action-row">
+                            <button class="btn-action btn-deduct" onclick="deductCrew('Beta Team')">Deduct</button>
+                            <button class="btn-action btn-suspend" onclick="suspendCrew('Beta Team', 'crew-beta')">Suspend</button>
+                            <button class="btn-action btn-kick" onclick="kickCrew('Beta Team', 'crew-beta')">Kick</button>
+                        </div>
+                    </div>
+                </div>
+            </section>
 
-Workforce Operations & Disciplinary Enforcement
+            <section class="card">
+                <div class="card-title">Strategic Milestones</div>
+                <div class="milestone-box">
+                    <h4>Seasonal Volume Goal</h4>
+                    <p>Target: 250 yards • Current progress is tracking ahead of expectations.</p>
+                    <div class="progress-bar">
+                        <div class="progress-fill" style="width: 61%"></div>
+                    </div>
+                </div>
+            </section>
+        </aside>
+    </div>
 
-Crew Identifier
-	Weekly Output
-	Current Status
-	Corrective Admin Enforcement Actions
-Alpha Crew
-	14 Yards Managed
-	Active Range
-	Beta Team
-	5 Yards Managed
-	On Notice
-	
-Predictive Growth Engine
+    <script>
+        function calculateLiveAccounting() {
+            let gross = 0;
+            let crewWages = 0;
+            let adminProfit = 0;
 
-Active Crew Elements
-Avg Yards Per Crew / Week
-Operational Run Weeks
-Strategic System Milestones
+            const rows = document.querySelectorAll('table tbody tr[data-price]');
 
-Seasonal Volume Milestone Target: 250 Yards
+            rows.forEach(function (row) {
+                const price = parseFloat(row.getAttribute('data-price')) || 0;
+                const status = row.querySelector('.status-select').value;
 
-Current Progress Level: 61% Complete
+                if (status === 'paid') {
+                    gross += price;
 
-// 1. Live Job State and Dynamic 1/3 and 2/3 Profit Split Formula
-function calculateLiveAccounting() {
-let gross = 0;
-let crewWages = 0;
-let adminProfit = 0;
-const rows = document.querySelectorAll("table tbody tr[data-price]");
-rows.forEach(row => {
-const price = parseFloat(row.getAttribute("data-price"));
-const status = row.querySelector(".status-select").value;
-if (status === "paid") {
-gross += price;
-// Exact structured pricing rules
-if (price === 25) {
-crewWages += 15;
-adminProfit += 10;
-} else if (price === 35) {
-crewWages += 20;
-adminProfit += 15;
-} else if (price === 45) {
-crewWages += 30;
-adminProfit += 15;
-} else {
-// Standard fallback fallback logic
-crewWages += (price * 2) / 3;
-adminProfit += price / 3;
-}
-}
-});
-document.getElementById("gross-val").innerText = "$" + gross.toFixed(2);
-document.getElementById("crew-val").innerText = "$" + crewWages.toFixed(2);
-document.getElementById("net-val").innerText = "$" + adminProfit.toFixed(2);
-}
-// 2. Predictive Engine & Live Milestone Tracker Calculations
-function updatePredictor() {
-const crews = parseInt(document.getElementById("pred-workers").value) || 0;
-const yards = parseInt(document.getElementById("pred-yards").value) || 0;
-const weeks = parseInt(document.getElementById("pred-weeks").value) || 0;
-const totalYardsProjected = crews * yards * weeks;
-const target = 250;
-let percentage = (totalYardsProjected / target) * 100;
-if (percentage > 100) percentage = 100;
-if (percentage < 0) percentage = 0;
-document.getElementById("progress-bar").style.width = percentage + "%";
-document.getElementById("progress-text").innerText = "Current Progress Level: " + Math.round(percentage) + "% Complete (" + totalYardsProjected + " Yards Projected)";
-}
-// 3. Disciplinary Action Systems
-function deductCrew(crewName) {
-let amount = prompt("Enter payment deduction fine amount for " + crewName + " ($):", "5.00");
-if (amount != null && amount !== "") {
-alert("Applied code deduction fine of $" + parseFloat(amount).toFixed(2) + " to " + crewName + "'s layout balance.");
-}
-}
-function suspendCrew(crewName, rowId) {
-const statusCell = document.querySelector("#" + rowId + " .crew-status");
-statusCell.innerHTML = 'Suspended';
-alert(crewName + " has been temporarily locked out of active scheduling queues.");
-}
-function kickCrew(crewName, rowId) {
-if (confirm("Are you absolutely sure you want to kick and terminate " + crewName + " from operations?")) {
-document.getElementById(rowId).remove();
-alert(crewName + " removed from system registry successfully.");
-}
-}
-// Run updates instantly on window boot up
-window.onload = function() {
-calculateLiveAccounting();
-updatePredictor();
-};
+                    if (price === 25) {
+                        crewWages += 15;
+                        adminProfit += 10;
+                    } else if (price === 35) {
+                        crewWages += 20;
+                        adminProfit += 15;
+                    } else if (price === 45) {
+                        crewWages += 30;
+                        adminProfit += 15;
+                    } else {
+                        crewWages += (price * 2) / 3;
+                        adminProfit += price / 3;
+                    }
+                }
+            });
+
+            document.getElementById('gross-val').textContent = '$' + gross.toFixed(2);
+            document.getElementById('crew-val').textContent = '$' + crewWages.toFixed(2);
+            document.getElementById('net-val').textContent = '$' + adminProfit.toFixed(2);
+        }
+
+        function updatePredictor() {
+            const crews = parseInt(document.getElementById('pred-workers').value, 10) || 0;
+            const yards = parseInt(document.getElementById('pred-yards').value, 10) || 0;
+            const weeks = parseInt(document.getElementById('pred-weeks').value, 10) || 0;
+            const totalYardsProjected = crews * yards * weeks;
+            const target = 250;
+            let percentage = (totalYardsProjected / target) * 100;
+
+            if (percentage > 100) percentage = 100;
+            if (percentage < 0) percentage = 0;
+
+            const fill = document.getElementById('progress-bar');
+            fill.style.width = percentage + '%';
+            document.getElementById('progress-text').textContent = 'Current Progress Level: ' + Math.round(percentage) + '% Complete (' + totalYardsProjected + ' Yards Projected)';
+        }
+
+        function deductCrew(crewName) {
+            const amount = prompt('Enter payment deduction fine amount for ' + crewName + ' ($):', '5.00');
+            if (amount !== null && amount !== '') {
+                const value = parseFloat(amount);
+                if (!isNaN(value)) {
+                    alert('Applied deduction fine of $' + value.toFixed(2) + ' to ' + crewName + "'s balance.");
+                }
+            }
+        }
+
+        function suspendCrew(crewName, rowId) {
+            const statusCell = document.querySelector('#' + rowId + ' .crew-status');
+            if (statusCell) {
+                statusCell.textContent = 'Suspended';
+                statusCell.style.background = 'rgba(239, 68, 68, 0.12)';
+                statusCell.style.color = '#b91c1c';
+            }
+            alert(crewName + ' has been temporarily locked out of active scheduling queues.');
+        }
+
+        function kickCrew(crewName, rowId) {
+            const confirmed = confirm('Are you sure you want to remove ' + crewName + ' from operations?');
+            if (confirmed) {
+                const row = document.getElementById(rowId);
+                if (row) row.remove();
+                alert(crewName + ' removed from the active operations roster.');
+            }
+        }
+
+        document.getElementById('pred-workers').addEventListener('input', updatePredictor);
+        document.getElementById('pred-yards').addEventListener('input', updatePredictor);
+        document.getElementById('pred-weeks').addEventListener('input', updatePredictor);
+
+        window.onload = function () {
+            calculateLiveAccounting();
+            updatePredictor();
+        };
+    </script>
+</body>
+</html>
